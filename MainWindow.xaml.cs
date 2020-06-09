@@ -15,6 +15,7 @@ namespace Hanoi
         private StackPanel sourceStack;
         private StackPanel targetStack;
 
+        private int diskCount;
         private int moveCount;
 
         public MainWindow()
@@ -30,7 +31,6 @@ namespace Hanoi
         private void bNewGame_Click(object sender, RoutedEventArgs e)
         {
             // Parse aantal schijven.
-            int diskCount;
             try
             {
                 diskCount = int.Parse(tbDiskCount.Text);
@@ -40,7 +40,27 @@ namespace Hanoi
             {
                 Console.WriteLine("Error parsing disk count: " + ex);
                 tbDiskCount.Background = Brushes.Red;
+                tbDiskCount.SelectAll();
+                tbDiskCount.Focus();
                 return;
+            }
+            if (diskCount < 2)
+            {
+                MessageBox.Show("Geef minstens 2 schijven op", "Fout",
+                    MessageBoxButton.OK, MessageBoxImage.Error);
+                tbDiskCount.SelectAll();
+                tbDiskCount.Focus();
+                return;
+            }
+
+            // Beetje jammer als je per ongeluk op "Nieuw spel" drukt als je al heel ver bent...
+            if (moveCount > 2)
+            {
+                if (MessageBox.Show("Opnieuw beginnen?", "Torens van Hanoi",
+                        MessageBoxButton.YesNo, MessageBoxImage.Warning) != MessageBoxResult.Yes)
+                {
+                    return;
+                }
             }
 
             // Maak alle stokken leeg, reset het aantal zetten en voeg nieuwe schijven toe.
@@ -109,6 +129,15 @@ namespace Hanoi
                 targetStack.Children.Insert(0, dragDisk);
                 lMoveCount.Content = ++moveCount;
                 Console.WriteLine("Disk moved");
+
+                if (targetStack.Children.Count == diskCount)
+                {
+                    MessageBox.Show("De wereld zal nu eindigen", "Klaar!",
+                        MessageBoxButton.OK, MessageBoxImage.Warning);
+
+                    // Anders komt er een waarschuwing bij het starten van een nieuw spel.
+                    moveCount = 0;
+                }
             }
         }
     }

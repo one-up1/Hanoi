@@ -23,30 +23,55 @@
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
 
-        <StackPanel
+        <Grid
             Grid.Row="0"
             Grid.Column="0"
             Margin="3">
 
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+            <Label
+                Grid.Row="0"
+                Grid.Column="0"
+                Margin="3"
+                Content="Aantal schijven:" />
+
             <TextBox
                 Name="tbDiskCount"
+                Grid.Row="0"
+                Grid.Column="1"
                 HorizontalContentAlignment="Center"
+                VerticalContentAlignment="Center"
                 Margin="3"
+                FontSize="14"
+                FontWeight="Bold"
                 Text="8" />
 
             <Button
                 Name="bNewGame"
-                Content="Nieuw spel"
+                Grid.Row="1"
+                Grid.ColumnSpan="2"
+                Height="35"
                 Margin="3"
+                Content="Nieuw spel"
                 Click="bNewGame_Click" />
 
-        </StackPanel>
+        </Grid>
 
         <Label
             Name="lMoveCount"
             Grid.Row="0"
             Grid.Column="1"
             HorizontalContentAlignment="Center"
+            VerticalContentAlignment="Center"
             FontSize="16"
             FontWeight="Bold"
             Content="0" />
