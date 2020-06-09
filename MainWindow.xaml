@@ -3,9 +3,11 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Hanoi"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800" Loaded="Window_Loaded">
+        Width="800"
+        Height="450"
+        Title="MainWindow"
+        Loaded="Window_Loaded" WindowStartupLocation="CenterScreen">
     <Grid>
 
         <Grid.RowDefinitions>
@@ -18,24 +20,92 @@
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
 
-        <StackPanel
+        <Border
             Grid.Column="0"
-            Name="spRod1"
-            AllowDrop="true"
-            PreviewDrop="spRod1_PreviewDrop"
-            Drop="spRod1_Drop" />
-
-        <StackPanel Background="Blue"
-            Grid.Column="1"
-            Name="spRod2"
+            BorderThickness="1"
+            BorderBrush="Black"
+            Margin="6"
             AllowDrop="True"
-            Drop="spRod2_Drop" />
+            Drop="Rod_Drop">
 
-        <StackPanel Background="Blue"
+            <Grid>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <Label
+                    Grid.Row="0"
+                    HorizontalContentAlignment="Center"
+                    Content="Toren 1" />
+
+                <StackPanel
+                    Name="spRod1"
+                    Grid.Row="1"
+                    VerticalAlignment="Bottom" />
+
+            </Grid>
+            
+        </Border>
+
+        <Border
+            Grid.Column="1"
+            BorderThickness="1"
+            BorderBrush="Black"
+            Margin="6"
+            AllowDrop="True"
+            Drop="Rod_Drop">
+
+            <Grid>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <Label
+                    Grid.Row="0"
+                    HorizontalContentAlignment="Center"
+                    Content="Toren 2" />
+
+                <StackPanel
+                    Name="spRod2"
+                    Grid.Row="1"
+                    VerticalAlignment="Bottom" />
+
+            </Grid>
+
+        </Border>
+
+        <Border
             Grid.Column="2"
-            Name="spRod3"
-            AllowDrop="true"
-            Drop="spRod3_Drop "/>
+            BorderThickness="1"
+            BorderBrush="Black"
+            Margin="6"
+            AllowDrop="True"
+            Drop="Rod_Drop">
+
+            <Grid>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <Label
+                    Grid.Row="0"
+                    HorizontalContentAlignment="Center"
+                    Content="Toren 3" />
+
+                <StackPanel
+                    Name="spRod3"
+                    Grid.Row="1"
+                    VerticalAlignment="Bottom" />
+
+            </Grid>
+
+        </Border>
 
     </Grid>
 </Window>
