@@ -130,7 +130,7 @@ namespace Hanoi
                 lMoveCount.Content = ++moveCount;
                 Console.WriteLine("Disk moved");
 
-                if (targetStack.Children.Count == diskCount)
+                if (targetStack != stack1 && targetStack.Children.Count == diskCount)
                 {
                     MessageBox.Show("De wereld zal nu eindigen", "Klaar!",
                         MessageBoxButton.OK, MessageBoxImage.Warning);
