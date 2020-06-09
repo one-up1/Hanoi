@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
         Width="600"
-        Height="400"
+        Height="450"
         Title="Torens van Hanoi"
         WindowStartupLocation="CenterScreen"
         Loaded="Window_Loaded">
@@ -13,6 +13,7 @@
     <Grid>
 
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
             <RowDefinition />
         </Grid.RowDefinitions>
 
@@ -22,7 +23,36 @@
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
 
+        <StackPanel
+            Grid.Row="0"
+            Grid.Column="0"
+            Margin="3">
+
+            <TextBox
+                Name="tbDiskCount"
+                HorizontalContentAlignment="Center"
+                Margin="3"
+                Text="8" />
+
+            <Button
+                Name="bNewGame"
+                Content="Nieuw spel"
+                Margin="3"
+                Click="bNewGame_Click" />
+
+        </StackPanel>
+
+        <Label
+            Name="lMoveCount"
+            Grid.Row="0"
+            Grid.Column="1"
+            HorizontalContentAlignment="Center"
+            FontSize="16"
+            FontWeight="Bold"
+            Content="0" />
+
         <Border
+            Grid.Row="1"
             Grid.Column="0"
             Margin="6"
             BorderThickness="1"
@@ -41,7 +71,7 @@
                 <Label
                     Grid.Row="0"
                     HorizontalContentAlignment="Center"
-                    FontSize="16"
+                    FontSize="14"
                     FontWeight="Bold"
                     Content="Toren 1" />
 
@@ -55,6 +85,7 @@
         </Border>
 
         <Border
+            Grid.Row="1"
             Grid.Column="1"
             Margin="6"
             BorderThickness="1"
@@ -73,7 +104,7 @@
                 <Label
                     Grid.Row="0"
                     HorizontalContentAlignment="Center"
-                    FontSize="16"
+                    FontSize="14"
                     FontWeight="Bold"
                     Content="Toren 2" />
 
@@ -87,6 +118,7 @@
         </Border>
 
         <Border
+            Grid.Row="1"
             Grid.Column="2"
             BorderThickness="1"
             Margin="6"
@@ -105,7 +137,7 @@
                 <Label
                     Grid.Row="0"
                     HorizontalContentAlignment="Center"
-                    FontSize="16"
+                    FontSize="14"
                     FontWeight="Bold"
                     Content="Toren 3" />
 

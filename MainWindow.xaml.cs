@@ -15,6 +15,8 @@ namespace Hanoi
         private StackPanel sourceStack;
         private StackPanel targetStack;
 
+        private int moveCount;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -22,16 +24,47 @@ namespace Hanoi
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            for (int i = 1; i <= 8; i++)
+            AddDisks(8);
+        }
+
+        private void bNewGame_Click(object sender, RoutedEventArgs e)
+        {
+            // Parse aantal schijven.
+            int diskCount;
+            try
+            {
+                diskCount = int.Parse(tbDiskCount.Text);
+                tbDiskCount.Background = Brushes.Transparent;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error parsing disk count: " + ex);
+                tbDiskCount.Background = Brushes.Red;
+                return;
+            }
+
+            // Maak alle stokken leeg, reset het aantal zetten en voeg nieuwe schijven toe.
+            stack1.Children.Clear();
+            stack2.Children.Clear();
+            stack3.Children.Clear();
+
+            moveCount = 0;
+            lMoveCount.Content = "0";
+
+            AddDisks(diskCount);
+        }
+
+        private void AddDisks(int count)
+        {
+            for (int i = 0; i < count; i++)
             {
                 Label disk = new Label();
                 disk.HorizontalContentAlignment = HorizontalAlignment.Center;
                 disk.Margin = new Thickness(3);
                 disk.BorderThickness = new Thickness(1);
                 disk.BorderBrush = Brushes.Black;
-                disk.FontSize = 14;
                 disk.FontWeight = FontWeights.Bold;
-                disk.Content = i;
+                disk.Content = i + 1;
                 disk.Tag = i;
                 disk.MouseDown += Disk_MouseDown;
                 stack1.Children.Add(disk);
@@ -74,6 +107,7 @@ namespace Hanoi
             {
                 sourceStack.Children.Remove(dragDisk);
                 targetStack.Children.Insert(0, dragDisk);
+                lMoveCount.Content = ++moveCount;
                 Console.WriteLine("Disk moved");
             }
         }
