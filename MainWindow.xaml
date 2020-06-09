@@ -4,10 +4,12 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Width="800"
-        Height="450"
-        Title="MainWindow"
-        Loaded="Window_Loaded" WindowStartupLocation="CenterScreen">
+        Width="600"
+        Height="400"
+        Title="Torens van Hanoi"
+        WindowStartupLocation="CenterScreen"
+        Loaded="Window_Loaded">
+    
     <Grid>
 
         <Grid.RowDefinitions>
@@ -22,14 +24,14 @@
 
         <Border
             Grid.Column="0"
-            BorderThickness="1"
-            BorderBrush="Black"
             Margin="6"
-            AllowDrop="True"
-            DragOver="Rod_DragOver"
-            Drop="Rod_Drop">
+            BorderThickness="1"
+            BorderBrush="Black">
 
-            <Grid>
+            <Grid
+                AllowDrop="True"
+                DragOver="Stack_DragOver"
+                Drop="Stack_Drop">
 
                 <Grid.RowDefinitions>
                     <RowDefinition />
@@ -39,10 +41,12 @@
                 <Label
                     Grid.Row="0"
                     HorizontalContentAlignment="Center"
+                    FontSize="16"
+                    FontWeight="Bold"
                     Content="Toren 1" />
 
                 <StackPanel
-                    Name="spRod1"
+                    Name="stack1"
                     Grid.Row="1"
                     VerticalAlignment="Bottom" />
 
@@ -52,14 +56,14 @@
 
         <Border
             Grid.Column="1"
-            BorderThickness="1"
-            BorderBrush="Black"
             Margin="6"
-            AllowDrop="True"
-            DragOver="Rod_DragOver"
-            Drop="Rod_Drop">
+            BorderThickness="1"
+            BorderBrush="Black">
 
-            <Grid>
+            <Grid
+                AllowDrop="True"
+                DragOver="Stack_DragOver"
+                Drop="Stack_Drop">
 
                 <Grid.RowDefinitions>
                     <RowDefinition />
@@ -69,10 +73,12 @@
                 <Label
                     Grid.Row="0"
                     HorizontalContentAlignment="Center"
+                    FontSize="16"
+                    FontWeight="Bold"
                     Content="Toren 2" />
 
                 <StackPanel
-                    Name="spRod2"
+                    Name="stack2"
                     Grid.Row="1"
                     VerticalAlignment="Bottom" />
 
@@ -83,13 +89,13 @@
         <Border
             Grid.Column="2"
             BorderThickness="1"
-            BorderBrush="Black"
             Margin="6"
-            AllowDrop="True"
-            DragOver="Rod_DragOver"
-            Drop="Rod_Drop">
+            BorderBrush="Black">
 
-            <Grid>
+            <Grid
+                AllowDrop="True"
+                DragOver="Stack_DragOver"
+                Drop="Stack_Drop">
 
                 <Grid.RowDefinitions>
                     <RowDefinition />
@@ -99,10 +105,12 @@
                 <Label
                     Grid.Row="0"
                     HorizontalContentAlignment="Center"
+                    FontSize="16"
+                    FontWeight="Bold"
                     Content="Toren 3" />
 
                 <StackPanel
-                    Name="spRod3"
+                    Name="stack3"
                     Grid.Row="1"
                     VerticalAlignment="Bottom" />
 
@@ -111,4 +119,5 @@
         </Border>
 
     </Grid>
+    
 </Window>
