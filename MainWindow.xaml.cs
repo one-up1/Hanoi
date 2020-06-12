@@ -143,6 +143,8 @@ namespace Hanoi
                     if (moveCount < minMoves)
                     {
                         // Dit kan niet :)
+                        // Eigenlijk zou de compiler hier een warning moeten geven
+                        // "condition is always false". :)
                         throw new Exception("Impossible :O");
                     }
                     else if (diskCount >= 64)
