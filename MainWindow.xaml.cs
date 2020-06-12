@@ -16,16 +16,18 @@ namespace Hanoi
         private StackPanel targetStack;
 
         private int diskCount;
+        private int minMoves;
         private int moveCount;
 
         public MainWindow()
         {
             InitializeComponent();
+            diskCount = 8;
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            AddDisks(8);
+            AddDisks();
         }
 
         private void bNewGame_Click(object sender, RoutedEventArgs e)
@@ -44,9 +46,9 @@ namespace Hanoi
                 tbDiskCount.Focus();
                 return;
             }
-            if (diskCount < 2)
+            if (diskCount < 3)
             {
-                MessageBox.Show("Geef minstens 2 schijven op", "Fout",
+                MessageBox.Show("Geef minstens 3 schijven op", "Fout",
                     MessageBoxButton.OK, MessageBoxImage.Error);
                 tbDiskCount.SelectAll();
                 tbDiskCount.Focus();
@@ -54,7 +56,7 @@ namespace Hanoi
             }
 
             // Beetje jammer als je per ongeluk op "Nieuw spel" drukt als je al heel ver bent...
-            if (moveCount > 2)
+            if (moveCount > 3)
             {
                 if (MessageBox.Show("Opnieuw beginnen?", "Torens van Hanoi",
                         MessageBoxButton.YesNo, MessageBoxImage.Warning) != MessageBoxResult.Yes)
@@ -71,12 +73,17 @@ namespace Hanoi
             moveCount = 0;
             lMoveCount.Content = "0";
 
-            AddDisks(diskCount);
+            AddDisks();
         }
 
-        private void AddDisks(int count)
+        private void AddDisks()
         {
-            for (int i = 0; i < count; i++)
+            // Bereken minimum aantal zetten.
+            minMoves = (int)Math.Pow(2, diskCount) - 1;
+            Console.WriteLine("minMoves=" + minMoves);
+
+            // Voeg voor iedere schijf een Label toe aan het eerste StackPanel.
+            for (int i = 0; i < diskCount; i++)
             {
                 Label disk = new Label();
                 disk.HorizontalContentAlignment = HorizontalAlignment.Center;
@@ -130,10 +137,37 @@ namespace Hanoi
                 lMoveCount.Content = ++moveCount;
                 Console.WriteLine("Disk moved");
 
+                // Als alle schijven op een andere stok zitten zijn we klaar.
                 if (targetStack != stack1 && targetStack.Children.Count == diskCount)
                 {
-                    MessageBox.Show("De wereld zal nu eindigen", "Klaar!",
-                        MessageBoxButton.OK, MessageBoxImage.Warning);
+                    if (moveCount < minMoves)
+                    {
+                        // Dit kan niet :)
+                        throw new Exception("Impossible :O");
+                    }
+                    else if (diskCount >= 64)
+                    {
+                        // Er is een legende over een hindoe-tempel in de Indiase stad Benares
+                        // onder keizer Fo Hi, waarvan de priesters, de brahmanen, zich bezighouden
+                        // met het verplaatsen van een toren van 64 gouden schijven.
+                        // De schijven liggen op drie naalden van diamant,
+                        // een el lang en zo dik als het lichaam van een bij.
+                        // Volgens de legende komt de wereld tot een einde als het werk af is.
+                        MessageBox.Show("De wereld zal nu eindigen", "Klaar!",
+                            MessageBoxButton.OK, MessageBoxImage.Warning);
+                    }
+                    else if (moveCount == minMoves)
+                    {
+                        MessageBox.Show("Heel goed, in precies " + minMoves + " zetten", "Klaar!",
+                            MessageBoxButton.OK, MessageBoxImage.Information);
+                    }
+                    else
+                    {
+                        MessageBox.Show("In " + moveCount + " zetten." +
+                            Environment.NewLine + Environment.NewLine +
+                            "Maar het zou in " + minMoves + " zetten moeten kunnen!", "Klaar!",
+                            MessageBoxButton.OK, MessageBoxImage.Warning);
+                    }
 
                     // Anders komt er een waarschuwing bij het starten van een nieuw spel.
                     moveCount = 0;
