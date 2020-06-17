@@ -78,16 +78,19 @@ namespace Hanoi
 
         private void AddDisks()
         {
-            // Bereken minimum aantal zetten.
-            minMoves = (int)Math.Pow(2, diskCount) - 1;
-            Console.WriteLine("minMoves=" + minMoves);
-
             // Voeg voor iedere schijf een Label toe aan het eerste StackPanel.
+            // De bovenste schijf krijgt de hoogste margin wat relatief is aan het aantal schijven.
+            double topDiskMargin = diskCount * 9;
             for (int i = 0; i < diskCount; i++)
             {
+                // En iedere schijf krijgt een margin tussen 3 en die van de bovenste.
+                double diskMargin = topDiskMargin - (topDiskMargin - 3) / (diskCount - 1) * i;
+                Console.WriteLine("diskMargin=" + diskMargin);
+
                 Label disk = new Label();
                 disk.HorizontalContentAlignment = HorizontalAlignment.Center;
-                disk.Margin = new Thickness(3);
+                disk.Margin = new Thickness(diskMargin, 3, diskMargin, 3);
+                //disk.Margin = new Thickness(3);
                 disk.BorderThickness = new Thickness(1);
                 disk.BorderBrush = Brushes.Black;
                 disk.FontWeight = FontWeights.Bold;
@@ -96,6 +99,10 @@ namespace Hanoi
                 disk.MouseDown += Disk_MouseDown;
                 stack1.Children.Add(disk);
             }
+
+            // Bereken het minimum aantal zetten.
+            minMoves = (int)Math.Pow(2, diskCount) - 1;
+            Console.WriteLine("minMoves=" + minMoves);
         }
 
         private void Disk_MouseDown(object sender, MouseButtonEventArgs e)
